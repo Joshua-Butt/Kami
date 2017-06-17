@@ -1,193 +1,303 @@
-/* Main stylesheet Properties */
 #header {
-    height: 192px;
+    background-image: url(%%header-splash%%);
+    background-position: 50% 0;
+    background-size: cover;
+    border-bottom: none;
 }
 
 #sr-header-area {
-    height: 19px;
-}
-
-
-/*
-* TAB MENU
-**************************************************************/
-#header-bottom-left {
-    height: 192px;
-}
-
-.tabmenu {
-    display: block;
-    position: absolute;
-    bottom: 0;
-
-    height: 64px;
-    width: calc(100% - 64px);
-    padding-left: 64px;
-
-    background-color: #9C27B0;
+    height: 24px;
+    line-height: 24px;
+    color: #000000;
+    background-color: #ffffff;
     box-shadow: 0 2px 5px rgba(0,0,0,.26);
 }
 
-.listing-page #header .tabmenu li {
+#RESShortcutsEditContainer, #RESShortcutsSort, #RESShortcutsRight, #RESShortcutsLeft, #RESShortcutsAdd {
+    background: transparent!important;
+}
+
+#header-img {
+    margin: 0 8px 0 8px;
+    width: 40px !important;
+    height: 135px !important;
+    background-image: url(%%reddit-snoo%%) !important;
+    background-size: 80px;
+    background-position: 0 0 !important;
+}
+
+#header-img:hover {
+    background-position: -40px 0 !important;
+}
+
+.pagename {
+    font-size: 0;
+}
+
+.pagename a {
+    font-size: 0;
     display: inline-block;
-    width: 32px;
-    height: 32px;
-    background-image: url(%%imgsheet-light%%);
-    background-size: 384px;
-    opacity: 0.67;
+    width: 280px;
+    height: 135px;
 
-    position: relative;
-    top: 16px;
-    margin: 0 4px 0 4px;
-}
-
-.listing-page #header .tabmenu li.selected {
-    opacity: 0.84;
-}
-
-.listing-page #header .tabmenu li:hover{
-    opacity: 1;
-}
-
-.listing-page #header .tabmenu li a {
-    width: 32px;
-    height: 32px;
-    display: inline-block;
-    font-size: 0px;
-    border: none;
-    background-color: transparent;
-
-    position: absolute;
-    left: 0;
-}   
-
-.listing-page #header .tabmenu li:before{
-    opacity: 0;
-    min-width: 24px;
-    padding: 0 4px 0 4px;
-    height: 16px;
-    transition: ease-in-out 300ms;
-
-    display: inline-block;
-
-    position: relative;
-    top: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-
-    font-size: 12px;
-    text-align: center;
-    background-color: #FFF;
-    line-height: 16px;
-    border-radius: 2px;
-
-    box-shadow: 0 2px 5px rgba(0,0,0,.26)
-
-}
-
-.listing-page #header .tabmenu li:hover:before{
-    opacity: 1;
-}
-
-
-
-.listing-page #header .tabmenu li:nth-child(1) { 
+    background-image: url(%%header-logo%%);
+    background-size: 280px;
     background-position: 0 0;
 }
-.listing-page #header .tabmenu li:nth-child(1):before {
-    content: "Hot"
+
+.pagename a:hover {
+    background-position: 0 -135px;
 }
 
-
-.listing-page #header .tabmenu li:nth-child(2) {
-    background-position: -32px 0;
-}
-.listing-page #header .tabmenu li:nth-child(2):before {
-    content: "New"
-}
-
-.listing-page #header .tabmenu li:nth-child(3) { /* Rising */
-    background-position: -64px 0;
-}
-.listing-page #header .tabmenu li:nth-child(3):before {
-    content: "Rising"
+#header-bottom-left .tabmenu li a {
+    background-color: transparent;
+    color: #ffffff;
+    opacity: 0.7;
+    font-size: 14px;
+    line-height: 24px;
+    padding-bottom: 4px;
 }
 
-.listing-page #header .tabmenu li:nth-child(4) { /* Rising */
-    background-position: -96px 0;
-}
-.listing-page #header .tabmenu li:nth-child(4):before {
-    content: "Controversial"
+#header-bottom-left .tabmenu li a:hover {
+    opacity: 1;
+    text-decoration: underline;
 }
 
-.listing-page #header .tabmenu li:nth-child(5) { /* Rising */
-    background-position: -128px 0;
+#header-bottom-left .tabmenu li.selected a {
+    color: #000000;
+    border: none;
+    border-radius: 4px 4px 0 0;
+    background-color: #fafafa;
+    font-weight: bold;
+    opacity: 1;
 }
-.listing-page #header .tabmenu li:nth-child(5):before {
-    content: "Top"
-}
-
-.listing-page #header .tabmenu li:nth-child(6) { /* Rising */
-    background-position: -160px 0;
-}
-.listing-page #header .tabmenu li:nth-child(6):before {
-    content: "Gilded"
-}
-
-.listing-page #header .tabmenu li:nth-child(7) { /* Rising */
-    background-position: -192px 0;
-}
-.listing-page #header .tabmenu li:nth-child(7):before {
-    content: "Wiki"
-}
-
-.listing-page #header .tabmenu li:nth-child(8) { /* Rising */
-    background-position: -224px 0;
-}
-.listing-page #header .tabmenu li:nth-child(8):before {
-    content: "Promoted"
-}
-
-.listing-page #header .tabmenu li:nth-child(9) { /* Rising */
-    background-position: -256px 0;
-}
-.listing-page #header .tabmenu li:nth-child(9):before {
-    content: "Toggle Filterline"
-}
-
-.listing-page #header .tabmenu li:nth-child(10) { /* Rising */
-    background-position: -288px 0;
-}
-.listing-page #header .tabmenu li:nth-child(10):before {
-    content: "Show Images" attr(aftercontent)!important;
-}
-
-.listing-page #header .tabmenu li:nth-child(11) { /* Rising */
-    background-position: -320px 0;
-}
-.listing-page #header .tabmenu li:nth-child(11):before {
-    content: "Metrics"
-}
-
-.listing-page #header .tabmenu li:nth-child(12) { /* Rising */
-    background-position: -352px 0;
-}
-.listing-page #header .tabmenu li:nth-child(12):before {
-    content: "Queue"
-}
-
-
-/*
-* USERBAR MENU
-**************************************************************/
 
 #header-bottom-right {
-    top: 128px!important;
-    height: 64px;
-    line-height: 64px;
+    height: 30px;
+    margin-bottom: 0;
+    padding: 0 20px;
+    background: transparent;
+    font-size: 11px;
+    letter-spacing: 0.48px;
+    line-height: 30px;
+    transform: translate3d(0, 0, 0);
+    transition: transform 100ms ease;
+    bottom: unset!important;
+    top: 32px!important;
 }
 
-#userbarToggle {
-    width: 32px;
+#header-bottom-right #RESAccountSwitcherIcon:hover,
+#header-bottom-right #mail:hover,
+#header-bottom-right #modmail:hover,
+#header-bottom-right #new_modmail:hover,
+#header-bottom-right a.pref-lang:hover,
+#header-bottom-right #RESSettingsButton:hover,
+.loggedin .logout a:hover {
+    transform: scale(1.15)
+}
+
+#header-bottom-right a {
+    color: #FFFFFF;
+    opacity: 1;
+    transition: all 0.2s ease;
+}
+
+#header-bottom-right a:hover {
+    text-decoration: underline !important;
+}
+
+#header-bottom-right .user a.login-required {
+    color: #0069e1
+}
+
+#header-bottom-right .user a.login-required:before {
+    content: "";
+}
+
+.loggedin #header-bottom-right .user {
+    color: transparent;
+    margin-right: -8px;
+    margin-left: 4px;
+}
+
+#header-bottom-right .user {
+    position: relative;
+    top: -2px;
+}
+
+#header-bottom-right .user a {
+    font-weight: 700 !important;
+    margin-right: 0px;
+    padding-right: 0px
+}
+
+#header-bottom-right .user .userkarma {
+    color: #D8D8D8;
+    font-weight: 500 !important;
+    margin-left: 0px;
+    padding-left: 0px
+}
+
+#header-bottom-right .user .userkarma:before {
+    content: "(";
+    display: inline-block;
+    margin-right: 0;
+    color: #D8D8D8;
+    background-position: 0 0;
+}
+
+#header-bottom-right .user .userkarma:after {
+    content: ")";
+    display: inline-block;
+    margin-right: 4px;
+    color: #D8D8D8;
+    background-position: 0 0;
+}
+
+#header-bottom-right .separator {
+    visibility: hidden;
+}
+
+#header-bottom-right #RESAccountSwitcherIcon,
+#header-bottom-right #mail,
+#header-bottom-right #modmail,
+#header-bottom-right #new_modmail,
+#header-bottom-right #RESSettingsButton {
+    height: 24px;
+    width: 24px;
+    background-image: url(%%header-imgsheet%%);
+    background-size: auto 24px;
     background-color: transparent;
+    border-radius: 2px;
+    opacity: 1;
+    transition: all 0.2s ease;
+}
+
+#header-bottom-right #mail {
+    top: 4px;
+}
+
+#header-bottom-right #mail.nohavemail {
+    background-position: -48px 0;
+}
+
+#header-bottom-right #mail.havemail {
+    background-position: -24px 0;
+}
+
+#header-bottom-right .message-count {
+    background-color: #FA3E3E;
+    color: #fff !important;
+    border-radius: 2px;
+    font-size: 10px;
+    letter-spacing: 0.3;
+    line-height: 14px;
+    font-weight: bold;
+    padding: 0px 2px 0px 3px;
+    height: 15px;
+    position: relative;
+    top: -9px;
+    left: -5px;
+    margin: 0px;
+    z-index: 100
+}
+
+#header-bottom-right #modmail,
+#header-bottom-right #new_modmail {
+    top: -3px;
+}
+
+#header-bottom-right #modmail.nohavemail {
+    background-position: -72px 0;
+}
+
+#header-bottom-right #modmail.havemail {
+    background-position: -96px 0;
+}
+
+#header-bottom-right #new_modmail.nohavemail {
+    background-position: -120px 0;
+}
+
+#header-bottom-right #new_modmail.havemail {
+    background-position: -144px 0;
+}
+
+#header-bottom-right a.pref-lang,
+.loggedin .logout a {
+    display: inline-block;
+    position: relative;
+    top: 4px;
+    margin: 0px;
+    height: 24px;
+    width: 24px;
+    color: transparent!important;
+    background-image: url(%%header-imgsheet%%);
+    background-size: auto 24px;
+    border-radius: 2px;
+    opacity: 1;
+    transition: all 0.2s ease;
+}
+
+#header-bottom-right a.pref-lang {
+    background-position: -168px 0;
+    top: -2px;
+}
+
+#header-bottom-right #RESSettingsButton {
+    background-position: -192px 0;
+    top: 2px;
+}
+#header-bottom-right #RESSettingsButton:after {
+    content: none;
+}
+
+.loggedin .logout a {
+    background-position: -216px 0px;
+    top: -2px;
+}
+
+.RESDropdownList {
+    background-color: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,.26);
+}
+
+.RESDropdownList li {
+    border: none !important;
+    color: #000000;
+}
+
+#RESAccountSwitcherIconOverlay {
+    display: none!important;
+}
+
+.RESDropdownList li:hover, .RESDropdownList a:hover {
+    color: initial!important;
+    text-decoration: underline;
+    background-color: transparent!important;
+}
+
+.res #userbarToggle {
+    background: transparent;
+    border: 0;
+    line-height: 34px;
+    height: 30px;
+    left: 0;
+}
+
+.beta-hint {
+    position: absolute;
+    left: -30px;
+    top: 0;
+    line-height: 30px;
+    height: 30px;
+    width: 30px;
+}
+.beta-hint a {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
 }

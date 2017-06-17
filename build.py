@@ -1,90 +1,66 @@
-#!/usr/bin/python3
-import csscompressor
-import time
+#! python3
+import datetime
+import json
+from csscompressor import compress
 
-style_name = """
-  _   __  ___  ___  ___ _____ 
- | | / / / _ \ |  \/  ||_   _|
- | |/ / / /_\ \| .  . |  | | 
- |    \ |  _  || |\/| |  | |  
- | |\  \| | | || |  | | _| |_ 
- \_| \_/\_| |_/\_|  |_/ \___/                          
-"""
+def main():
+    # Open config file
+    with open("config.json", 'r') as config_file:
+        config = json.load(config_file)
 
-subreddit_name = "Kami"
+    # Incriment the build counter
+    config["build"] += 1
 
-authors = [
-    "Haruka-sama", # Original theme creator
-    #"", # Add additional authors here
-]
+    # Print starting script message
+    print("\n{} CSS; build #{}\n\nStarting...\n".format(config["name"], config["build"]))
 
-source_css = [
-    "header.css", # Header
-    "sidebar.css", # Sidebar
-    #"", # Add additional sources here
-]
+    # Generate the CSS file header comment
+    compiled_css = ""
+    author_comment = "/*\n\tStylesheet for {}; build #{}\n\tAuthor{}: {}\n\tBuild Date: {}\n*/\n\n".format(
+        config["name"], 
+        config["build"], 
+        "s" if len(config["authors"]) > 1 else "", 
+        " & ".join(", ".join(config["authors"]).rsplit(', ', 1)),
+        datetime.datetime.utcnow().strftime("%m/%d/%Y @ %H:%M UTC")
+    )
 
+    # Print messages for css file
+    print("Reading from CSS files:")
 
-def gen_sub_info():
-    subreddit_info = {}
-
-    # Get the subreddit name
-    subreddit_info["subreddit"] = subreddit_name
-
-    # Get the stylesheet authors
-    if len(authors) == 0:
-        subreddit_info["authors"] = "/u/Haruka-sama"
-    elif len(authors) == 1:
-        subreddit_info["authors"] = "/u/" + authors[0]
-    else:
-        subreddit_info["authors"] = ""
-        for author in authors[:-1]:
-            subreddit_info["authors"] += "/u/{}, ".format(author)
-        else:
-            subreddit_info["authors"] += "/u/{}.".format(authors[-1])
-        subreddit_info["authors"] = subreddit_info["authors"][::-1].replace(",","& ",1)[::-1]
-
-    with open("build.no", 'r') as build_number:
-        subreddit_info["build"] =  build_number.read()
-    
-    with open("build.no", 'w') as build_number:
-        build_number.write(str(int(subreddit_info["build"]) + 1))
-    
-
-    return subreddit_info
-
-# File Generation Functions
-def comment_header(subreddit_info):
-    css_comment = """/*
-    KAMI CSS theme by /u/Haruka-sama for /r/{subreddit}; build #{build}
-    Authors: {authors}
-*/
-""".format(**subreddit_info)
-    return css_comment
-
-if __name__ == "__main__":
-    start_time = time.time()
-    css_output = ""
-    subreddit_info = gen_sub_info()
-
-    print(style_name)
-    print("generating stylesheet for /r/{subreddit}, build #{build}\n".format(**subreddit_info))
-
-    # Add aditional css files
-    for file in source_css:
-        print("\tadding: {}".format(file))
+    # Open indivual CSS files
+    for file in config["files"]:
+        # Try opening file
         try:
-            css_output += open("src/" + file, 'r').read()
-        except Exception as e:
-            print("\tError adding {}".format(file))
-            
-        
+            with open('{}/'.format(config["css_directory"]) + file, 'r') as css_file:
+                # Add css file to final CSS file
+                compiled_css += "/* {}\n------------------------------------------------------------------------------ */\n".format(file) + css_file.read() + "\n\n"
+                print("\t Succesfully added \"{}/{}\"".format(config["css_directory"], file))
+
+
+        # Print error if file not found
+        except FileNotFoundError:     
+            print("\tError reading \"{}/{}\": File not Found".format(config["css_directory"], file))
+
+
     # Write css to file
-    with open("output.css", 'w') as output:
-          output.write(comment_header(subreddit_info) + css_output)  
-    with open("output_minifided.css", 'w') as output:
-        output.write(comment_header(subreddit_info) + csscompressor.compress(css_output))
-    
-    end_time = time.time()
-    print("\nSuccesfully generated css file!")
-    print("\tTook {} seconds!".format(str(end_time - start_time)))
+    with open(config["unminified_file"], 'w') as output_file:
+        output_file.write(author_comment + compiled_css)
+        output_file.close()
+
+    # Write minified css to file
+    with open(config["minified_file"], 'w') as output_file:
+        output_file.write(author_comment + compress(compiled_css))
+        output_file.close()
+
+    # Write config to file
+    with open("config.json", 'w') as config_file:
+        config_file.write(json.dumps(config, sort_keys=True, indent=4))
+        config_file.close()
+
+    # Print confirming CSS file was succesfully generated
+    print("\nSuccesfully generated css files!")
+    print("\tunminified: {}, minified: {}".format(config["unminified_file"], config["minified_file"]))
+
+# Run Python script
+if __name__ == '__main__':
+    main()

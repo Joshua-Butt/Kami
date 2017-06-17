@@ -1,1 +1,2 @@
-output*.css
+dist.css
+build.css
