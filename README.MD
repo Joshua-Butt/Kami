@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/Joshua-Butt/Kami/master/github/logo.png" width="320" >
+<img src="https://raw.githubusercontent.com/Joshua-Butt/Kami/master/GitHub/logo.png" width="320" >
 
 ## CSS Theme for Reddit
 ### Based off [Google's material design guidelines](material.google.com).
